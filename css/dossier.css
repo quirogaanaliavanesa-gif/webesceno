@@ -1,0 +1,621 @@
+/* ==========================================================================
+   WEBESCENO - Estilos de Síntesis y Dossier Técnico de Producción
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   VISTA DE SÍNTESIS Y ARMONÍA VISUAL
+   -------------------------------------------------------------------------- */
+.synthesis-workspace {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: radial-gradient(circle at top, #161a24 0%, #0a0c10 100%);
+}
+
+.synthesis-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.synthesis-header h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.synthesis-header .subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Dual Preview Cards */
+.synthesis-dual-preview {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.preview-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.preview-card:hover {
+    border-color: var(--border-focus);
+    transform: translateY(-2px);
+}
+
+.preview-badge {
+    padding: 8px 14px;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border-subtle);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--text-primary);
+}
+
+.img-frame {
+    height: 380px;
+    background: #0a0c10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.img-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.preview-footer {
+    padding: 8px 14px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.lighting-tag, .fig-tag {
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+
+/* Grid de Análisis Cromático */
+.synthesis-analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: 1.25rem;
+}
+
+.analysis-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.analysis-box.highlight-box {
+    border-color: rgba(229, 169, 60, 0.4);
+    background: linear-gradient(180deg, #181d28 0%, #12151e 100%);
+}
+
+.analysis-box h3 {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.analysis-hint {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+}
+
+.palette-swatches-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.palette-swatch-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+}
+
+.chip-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+}
+
+.chip-name {
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chip-hex {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent-gold);
+}
+
+/* Indicador de Contraste y Dictamen */
+.contrast-score-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contrast-gauge {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-full);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 4px solid;
+}
+
+.contrast-gauge.high {
+    border-color: var(--accent-emerald);
+    color: var(--accent-emerald);
+    background: rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+}
+
+.contrast-gauge.medium {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    background: rgba(229, 169, 60, 0.1);
+    box-shadow: 0 0 16px rgba(229, 169, 60, 0.25);
+}
+
+.contrast-gauge.low {
+    border-color: var(--accent-crimson);
+    color: var(--accent-crimson);
+    background: rgba(225, 29, 72, 0.1);
+    box-shadow: 0 0 16px rgba(225, 29, 72, 0.25);
+}
+
+.gauge-value {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.gauge-label {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.contrast-verdict h4 {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.contrast-verdict p {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.35;
+}
+
+.scenic-advice-box {
+    background: rgba(229, 169, 60, 0.08);
+    border-left: 3px solid var(--accent-gold);
+    padding: 8px 12px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.synthesis-bottom-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn-primary-action.large {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+}
+
+/* --------------------------------------------------------------------------
+   MÓDULO 3: DOSSIER TÉCNICO & PRODUCTION RIDER
+   -------------------------------------------------------------------------- */
+.dossier-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: #080a0e;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dossier-document {
+    width: 100%;
+    max-width: 1100px;
+    background: #11141c;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.dossier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 1.5rem;
+    gap: 1.5rem;
+}
+
+.dossier-logo-badge {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-weight: 800;
+    color: var(--accent-gold);
+    margin-bottom: 4px;
+}
+
+.dossier-title {
+    font-family: var(--font-heading);
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.dossier-meta-row {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.header-export-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.btn-export-dossier {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 7px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+}
+
+.btn-export-dossier:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-gold);
+}
+
+.btn-export-dossier.primary {
+    background: linear-gradient(135deg, var(--accent-gold), #b45309);
+    color: #000;
+    font-weight: 700;
+    border: none;
+}
+
+.btn-export-dossier.success {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: var(--accent-emerald);
+}
+
+/* Secciones del Dossier */
+.dossier-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.section-heading {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 4px;
+}
+
+.section-intro {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Láminas Visuales */
+.dossier-plates-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.dossier-plate {
+    background: #090b0f;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.plate-title {
+    padding: 6px 12px;
+    background: var(--bg-card);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.dossier-plate img {
+    width: 100%;
+    height: 280px;
+    object-fit: contain;
+    background: #050608;
+}
+
+.plate-caption {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-subtle);
+}
+
+/* Tablas Técnicas */
+.dossier-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.dossier-table th {
+    background: var(--bg-panel);
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+}
+
+.dossier-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-primary);
+}
+
+.dossier-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.td-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 1.5rem !important;
+}
+
+.table-color-cell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+}
+
+.color-sample {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.mat-badge, .fabric-badge, .cat-badge {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.fabric-badge {
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--accent-cyan);
+}
+
+/* Iluminación Card */
+.lighting-summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.preset-name {
+    color: var(--accent-gold);
+}
+
+.lighting-cues-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+}
+
+.cue-item strong {
+    color: var(--text-primary);
+}
+
+/* Firmas de Producción */
+.dossier-footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.signature-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+}
+
+.sig-line {
+    width: 100%;
+    height: 1px;
+    background: var(--border-subtle);
+    margin-top: 40px;
+}
+
+.signature-box span {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   REGLAS PARA IMPRESIÓN DIRECTA / EXPORTAR A PDF (@media print)
+   -------------------------------------------------------------------------- */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        overflow: visible !important;
+        height: auto !important;
+    }
+
+    .app-header, .no-print, .side-inspector-panel, .stage-floating-toolbar, .stage-hud-overlay {
+        display: none !important;
+    }
+
+    .main-viewport {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .view-container {
+        position: static !important;
+        display: block !important;
+    }
+
+    .dossier-wrapper {
+        background: #ffffff !important;
+        padding: 0 !important;
+    }
+
+    .dossier-document {
+        max-width: 100% !important;
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        color: #111 !important;
+    }
+
+    .dossier-title {
+        color: #000000 !important;
+    }
+
+    .dossier-header {
+        border-bottom: 2px solid #000 !important;
+    }
+
+    .dossier-table {
+        background: #ffffff !important;
+        border: 1px solid #ddd !important;
+    }
+
+    .dossier-table th {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+        border-bottom: 1px solid #ccc !important;
+    }
+
+    .dossier-table td {
+        color: #111 !important;
+        border-bottom: 1px solid #eee !important;
+    }
+
+    .sig-line {
+        background: #999 !important;
+    }
+
+    .dossier-plate {
+        border: 1px solid #ccc !important;
+    }
+}

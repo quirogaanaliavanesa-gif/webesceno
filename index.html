@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBESCENO | Plataforma de Prototipado Escenográfico 3D y Vestuario</title>
+    <meta name="description" content="Plataforma web interactiva para el prototipado rápido de escenografía 3D y diseño de vestuario sobre figurines teatrales.">
+    <meta name="keywords" content="escenografia 3d, vestuario teatral, figurines, threejs, artes escenicas, prototipado rapido">
+
+    <!-- Tipografía Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/costume.css">
+    <link rel="stylesheet" href="css/dossier.css">
+
+    <!-- Icono Favicon SVG -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎭</text></svg>">
+</head>
+<body>
+
+    <!-- ENCABEZADO SUPERIOR -->
+    <header class="app-header">
+        <div class="brand-section">
+            <span class="brand-icon">🎭</span>
+            <div class="brand-text">
+                <div class="brand-title">
+                    <span>WEBESCENO</span>
+                    <span class="badge-pro">PRO 3D</span>
+                </div>
+                <span class="brand-subtitle">Prototipado Escenográfico & Vestuario</span>
+            </div>
+        </div>
+
+        <!-- Pestañas de Navegación -->
+        <nav class="nav-tabs-wrapper">
+            <button class="nav-tab-btn active" data-view="stage3d" id="tab-btn-stage">
+                <span>📐</span>
+                <span>Espacio Escenográfico 3D</span>
+            </button>
+            <button class="nav-tab-btn" data-view="costume2d" id="tab-btn-costume">
+                <span>👗</span>
+                <span>Taller de Vestuario 2D</span>
+            </button>
+            <button class="nav-tab-btn" data-view="synthesis" id="tab-btn-synthesis">
+                <span>⚖️</span>
+                <span>Síntesis & Armonía</span>
+            </button>
+            <button class="nav-tab-btn" data-view="dossier" id="tab-btn-dossier">
+                <span>📋</span>
+                <span>Dossier Técnico & Rider</span>
+            </button>
+        </nav>
+
+        <!-- Acciones Rápidas del Proyecto -->
+        <div class="header-right-actions">
+            <div class="project-title-box" title="Nombre de la obra teatral / producción">
+                <span>🎬</span>
+                <input type="text" id="project-title-input" value="La Vida es Sueño - Acto I" placeholder="Título de la obra...">
+            </div>
+
+            <label class="btn-header-action" title="Cargar proyecto guardado (.json)">
+                <span>📂</span>
+                <span>Importar</span>
+                <input type="file" id="input-file-import" accept=".json,.webesceno" style="display: none;">
+            </label>
+        </div>
+    </header>
+
+    <!-- ÁREA PRINCIPAL DE TRABAJO (VIEWPORT) -->
+    <main class="main-viewport" id="main-viewport">
+
+        <!-- ============================================================== -->
+        <!-- MÓDULO 1: ESPACIO ESCENOGRÁFICO 3D                             -->
+        <!-- ============================================================== -->
+        <section class="view-container" id="view-stage-3d">
+            <div class="stage-workspace">
+                <div class="stage-main-area">
+                    <!-- Contenedor WebGL Three.js -->
+                    <div id="stage-canvas-container"></div>
+
+                    <!-- Barra de Herramientas Flotante del Escenario 3D -->
+                    <div class="stage-floating-toolbar">
+                        <!-- Menú de Añadir Cuerpos Volumétricos -->
+                        <div class="toolbar-group-floating">
+                            <div class="dropdown-primitives-wrapper">
+                                <button class="btn-tool-icon" id="btn-open-primitives">
+                                    <span>➕ Añadir Cuerpo Escénico</span>
+                                    <span>▾</span>
+                                </button>
+                                <div class="dropdown-primitives-menu">
+                                    <button class="btn-add-primitive" data-primitive="cube">🔲 Cubo / Prisma Practicable</button>
+                                    <button class="btn-add-primitive" data-primitive="platform">🪜 Tarima Escénica Elevada</button>
+                                    <button class="btn-add-primitive" data-primitive="stairs">🪜 Escalera Modular</button>
+                                    <button class="btn-add-primitive" data-primitive="panel">🖼️ Bastidor / Panel Escénico</button>
+                                    <button class="btn-add-primitive" data-primitive="ramp">📐 Rampa / Plano Inclinado</button>
+                                    <button class="btn-add-primitive" data-primitive="cylinder">🔘 Columna Cilíndrica</button>
+                                    <button class="btn-add-primitive" data-primitive="mannequin">🧍 Figurín / Actor 3D (1.75m)</button>
+                                </div>
+                            </div>
+
+                            <div class="toolbar-separator"></div>
+
+                            <!-- Modos de Transformación del Gizmo 3D -->
+                            <button class="btn-tool-icon active" id="tool-translate" title="Modo Traslación (W)">
+                                <span>✥</span> <span>Mover (W)</span>
+                            </button>
+                            <button class="btn-tool-icon" id="tool-rotate" title="Modo Rotación (E)">
+                                <span>↻</span> <span>Rotar (E)</span>
+                            </button>
+                            <button class="btn-tool-icon" id="tool-scale" title="Modo Escala (R)">
+                                <span>⤢</span> <span>Escalar (R)</span>
+                            </button>
+
+                            <div class="toolbar-separator"></div>
+
+                            <!-- Snap Magnético a la Cuadrícula -->
+                            <div class="snap-control">
+                                <input type="checkbox" id="tool-snap-toggle" checked title="Ajuste magnético a la cuadrícula">
+                                <label for="tool-snap-toggle">Snap:</label>
+                                <select id="tool-snap-step">
+                                    <option value="0.25">0.25 m</option>
+                                    <option value="0.50">0.50 m</option>
+                                    <option value="1.00">1.00 m</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Vistas de Cámara e Iluminación Teatral -->
+                        <div class="toolbar-group-floating">
+                            <!-- Presets de Cámara -->
+                            <button class="btn-tool-icon btn-cam-view" data-cam="front" title="Vista Platea / Frontal">🎭 Platea</button>
+                            <button class="btn-tool-icon btn-cam-view" data-cam="top" title="Vista Planta / Cenital">📐 Planta</button>
+                            <button class="btn-tool-icon btn-cam-view" data-cam="side" title="Vista Lateral / Hombro">👤 Lateral</button>
+                            <button class="btn-tool-icon btn-cam-view" data-cam="director" title="Vista Dirección">🎬 Director</button>
+                            <button class="btn-tool-icon btn-cam-view active" data-cam="iso" title="Perspectiva Libre 3D">🔄 Libre</button>
+
+                            <div class="toolbar-separator"></div>
+
+                            <!-- Presets de Luz Teatral -->
+                            <div class="snap-control">
+                                <span>💡 Luz:</span>
+                                <select id="select-lighting-preset" title="Preset de iluminación escénica">
+                                    <option value="classic">Caja Negra Equilibrada</option>
+                                    <option value="warm">Ensayo Cálido (Tungsteno)</option>
+                                    <option value="expressionist">Claroscuro Expresionista</option>
+                                    <option value="spotlight">Foco Cenital Dramático</option>
+                                    <option value="sunset">Atardecer / Gualda</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overlay HUD con Atajos Escénicos -->
+                    <div class="stage-hud-overlay">
+                        <div class="hud-item"><strong>Ratón:</strong> Clic izquierdo = Seleccionar / Arrastrar Gizmo · Clic derecho = Paneo · Rueda = Zoom</div>
+                        <div class="hud-item"><strong>Teclas rápidas:</strong> <kbd>W</kbd> Trasladar · <kbd>E</kbd> Rotar · <kbd>R</kbd> Escalar · <kbd>Ctrl+D</kbd> Duplicar · <kbd>Supr</kbd> Eliminar</div>
+                    </div>
+                </div>
+
+                <!-- Panel Lateral del Inspector Escenográfico -->
+                <aside class="side-inspector-panel" id="stage-inspector-panel"></aside>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- MÓDULO 2: TALLER DE DISEÑO DE VESTUARIO 2D                     -->
+        <!-- ============================================================== -->
+        <section class="view-container hidden" id="view-costume-2d">
+            <div class="costume-workspace">
+                <div class="costume-main-canvas-area">
+                    <div class="canvas-artboard-wrapper">
+                        <!-- Canvas 2D de alta fidelidad para el figurín -->
+                        <canvas id="costume-canvas"></canvas>
+                    </div>
+                </div>
+
+                <!-- Panel Lateral del Taller de Vestuario -->
+                <aside class="side-inspector-panel" id="costume-inspector-panel"></aside>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- MÓDULO 3: SÍNTESIS Y ARMONÍA VISUAL                            -->
+        <!-- ============================================================== -->
+        <section class="view-container hidden" id="view-synthesis">
+            <div id="synthesis-container" style="width: 100%; height: 100%;"></div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- MÓDULO 4: DOSSIER TÉCNICO & PRODUCTION RIDER                    -->
+        <!-- ============================================================== -->
+        <section class="view-container hidden" id="view-dossier">
+            <div class="dossier-wrapper" id="dossier-container"></div>
+        </section>
+
+    </main>
+
+    <!-- Librerías Vendor Three.js (Cargadas localmente) -->
+    <script src="vendor/three.min.js"></script>
+    <script src="vendor/OrbitControls.js"></script>
+    <script src="vendor/TransformControls.js"></script>
+
+    <!-- Scripts de la Aplicación -->
+    <script src="js/state.js"></script>
+    <script src="js/three/proceduralTextures.js"></script>
+    <script src="js/three/stagePrimitives.js"></script>
+    <script src="js/three/stageLighting.js"></script>
+    <script src="js/three/stageManager.js"></script>
+
+    <script src="js/costume/fabricTextures.js"></script>
+    <script src="js/costume/garmentLibrary.js"></script>
+    <script src="js/costume/figurineStudio.js"></script>
+
+    <script src="js/ui/stageInspector.js"></script>
+    <script src="js/ui/costumeInspector.js"></script>
+    <script src="js/ui/synthesisView.js"></script>
+    <script src="js/ui/dossierExporter.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

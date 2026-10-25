@@ -1,0 +1,11 @@
+# Entorno y temporales del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs y volcados
+*.log
+
+# Editores
+.vscode/
+.idea/
